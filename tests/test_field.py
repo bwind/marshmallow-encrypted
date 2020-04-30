@@ -1,13 +1,11 @@
 import os
 
-from marshmallow import ValidationError
-
 import pytest
 from marshmallow_encrypted.field import EncryptedField
 
 
 def test_no_secret_key():
-    with pytest.raises(ValidationError):
+    with pytest.raises(TypeError):
         EncryptedField()
 
 

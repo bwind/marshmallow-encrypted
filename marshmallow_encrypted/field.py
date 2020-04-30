@@ -1,7 +1,6 @@
 import os
 
-from marshmallow import ValidationError, fields
-
+from marshmallow import fields
 from marshmallow_encrypted.crypto import decrypt, encrypt
 
 SECRET_KEY_ENV_NAME = "MARSHMALLOW_ENCRYPTED_SECRET_KEY"
@@ -18,11 +17,12 @@ class EncryptedField(fields.Field):
         try:
             self._secret_key = secret_key or os.environ[SECRET_KEY_ENV_NAME]
         except KeyError:
-            raise ValidationError(
+            raise TypeError(
                 f"No secret key found. Either provide `secret_key` when "
                 f"instantiating {self.__class__.__name__} or set the "
                 f"{SECRET_KEY_ENV_NAME} environment variable."
             )
+        super().__init__(*args, **kwargs)
 
     def _validated(self, value):
         if not isinstance(value, str):
