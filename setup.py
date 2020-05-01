@@ -23,6 +23,7 @@ setup(
     keywords=["marshmallow"],
     license="MIT",
     long_description=open("README.md").read(),
+    long_description_content_type="text/markdown",
     platforms="any",
     url="https://github.com/bwind/marshmallow_encrypted",
     version="0.1.0",
